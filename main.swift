@@ -31,11 +31,13 @@ func getHandlers(for scheme: String) -> [String]? {
     return defaultHandlers?.takeRetainedValue() as? [String]
 }
 
+@available(macOS 10.10, *)
 func setHandler(for scheme: String, as appName: String) {
     var bundleIdentifier: String? = nil
 
     // Match `appName' argument with a bundle identifier
-    if Bundle(identifier: appName) != nil {
+    let bundleInfo = LSCopyApplicationURLsForBundleIdentifier(appName as CFString, nil)
+    if bundleInfo != nil {
         bundleIdentifier = appName
     } else {
         // Places to look the app for
@@ -85,12 +87,18 @@ case "get" where CommandLine.argc == 3:
     getBundleName(for: CommandLine.arguments[2])
 case "set" where CommandLine.argc == 4:
     // Set the handler for a given scheme
-    setHandler(for: CommandLine.arguments[2], as: CommandLine.arguments[3])
+    if #available(macOS 10.10, *) {
+        setHandler(for: CommandLine.arguments[2], as: CommandLine.arguments[3])
+    } else {
+        print("This feature is for macOS 10.10+ only.")
+        exit(1)
+    }
 case "getall" where CommandLine.argc == 3:
     // Print all possible handlers for a given scheme
     if let handlers = getHandlers(for: CommandLine.arguments[2]) {
-        let msg = "Possible handlers for \(CommandLine.arguments[2]):"
-        print(handlers.reduce(msg, {x, y in "\(x)\n - \(y)"}))
+        for handler in handlers {
+            print(handler)
+        }
     } else {
         print("No handler for \(CommandLine.arguments[2])")
     }
