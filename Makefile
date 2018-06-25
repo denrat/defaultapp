@@ -5,11 +5,15 @@ EXE = defaultapp
 
 all: $(EXE)
 
+ifndef LOCATION
+LOCATION = /usr/local/bin/
+endif
+
 $(EXE): main.swift
 	$(CC) $< -o $@
 
 install: $(EXE)
-	cp $(EXE) /usr/local/bin/$(EXE)
+	cp $(EXE) $(LOCATION)
 
 clean:
 	rm -f $(EXE)
