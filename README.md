@@ -1,5 +1,5 @@
 # defaultapp
-A CLI to interact with default URL schemes on macOS
+A CLI to query and edit default URL schemes on macOS
 Inspired by [Grayson/defaultapp](https://github.com/Grayson/defaultapp/).
 
 ## Installation
