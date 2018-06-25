@@ -32,10 +32,14 @@ defaultapp get mailto  # -> com.apple.mail
 defaultapp getall mailto # -> com.apple.mail org.gnu.emacs
 ```
 
-- Change the app associated with the URL scheme (NB: must be one of the returned values of `defaultapp getall <scheme>`, will fail otherwise)
+- Change the app associated with the URL scheme
 
 ```sh
 defaultapp set mailto com.apple.mail
+# or
+defaultapp set mailto Mail
+# or
+defaultapp set mailto Mail.app
 ```
 
 - Show help
