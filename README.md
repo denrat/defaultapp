@@ -1,5 +1,6 @@
 # defaultapp
-A CLI to query and edit default URL schemes on macOS
+A CLI to query and edit default URL schemes on macOS.
+
 Inspired by [Grayson/defaultapp](https://github.com/Grayson/defaultapp/).
 
 ## Installation
@@ -19,8 +20,27 @@ make install LOCATION=$HOME/bin
 The development happens on Sierra but this should work with El Capitan and above.
 
 ## Usage
+- Get the bundle identifier for a given URL scheme
 
-```bash
+```sh
+defaultapp get mailto  # -> com.apple.mail
+```
+
+- Get all possible bundle identifiers to link to the given URL scheme
+
+```sh
+defaultapp getall mailto # -> com.apple.mail org.gnu.emacs
+```
+
+- Change the app associated with the URL scheme (NB: must be one of the returned values of `defaultapp getall <scheme>`, will fail otherwise)
+
+```sh
+defaultapp set mailto com.apple.mail
+```
+
+- Show help
+
+```sh
 defaultapp help
 ```
 
