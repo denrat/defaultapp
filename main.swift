@@ -97,7 +97,7 @@ switch CommandLine.arguments[1] {
 case "get" where CommandLine.argc == 3:
     // Print name for scheme in argument
     getBundleName(for: CommandLine.arguments[2])
-case "set" where CommandLine.argc == 4 || (CommandLine.argc == 5 && CommandLine.arguments[4] == "--simulation":
+case "set", "bind" where CommandLine.argc == 4 || (CommandLine.argc == 5 && CommandLine.arguments[4] == "--simulation":
     // Set the handler for a given scheme
     if #available(macOS 10.10, *) {
         setHandler(for: CommandLine.arguments[2], as: CommandLine.arguments[3])
