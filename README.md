@@ -11,7 +11,13 @@ cd defaultapp
 make install
 ```
 
-Alternatively, you can provide a custom location, e.g. `$HOME/bin/`:
+One-liner:
+
+```sh
+git clone https://github.com/h0d/defaultapp.git && make -C defaultapp install && rm -rf defaultapp
+```
+
+Alternatively, you can provide a custom location, e.g. `$HOME/bin` (default is `/usr/local/bin`):
 
 ```sh
 make install LOCATION=$HOME/bin
@@ -29,7 +35,7 @@ defaultapp get mailto  # -> com.apple.mail
 - Get all possible bundle identifiers to link to the given URL scheme
 
 ```sh
-defaultapp getall mailto # -> com.apple.mail org.gnu.emacs
+defaultapp getall mailto  # -> com.apple.mail org.gnu.emacs
 ```
 
 - Change the app associated with the URL scheme
@@ -49,5 +55,8 @@ defaultapp help
 ```
 
 ## TODO
-- Allow to edit default apps for a given filetype
-- Allow to bind scripts to URL schemes or filetypes
+- Allow to edit default apps for a given filetype (e.g. `defaultapp set .mkv IINA.app`)
+- Replace `defaultapp set` with `defaultapp bind` for readability?
+- Allow to bind scripts to URL schemes or filetypes (e.g. `defaultapp create myscheme Safari`, `defaultapp create https --file myscript.sh`)
+  - Possibly create a .app in ~/.config/defaultapp/custom/ with Contents/MacOS/name being `myscript $*` registering io.defaultapp.myscript
+- Start versionning
