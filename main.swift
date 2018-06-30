@@ -66,7 +66,19 @@ func setHandler(for scheme: String, as appName: String) {
     // Match bundle identifier with a registered app for the URL scheme
     if let handlersArray = getHandlers(for: scheme) {
         if handlersArray.contains(bundleIdentifier!) {
-            LSSetDefaultHandlerForURLScheme(scheme as CFString, bundleIdentifier! as CFString)
+            // Allow to discard changes with a parameter
+            if CommandLine.argc < 5 || CommandLine.arguments[4] != "--simulation" {
+                if scheme.hasPrefix(".") {
+                    // File type
+                    // FIXME manage file extensions
+                } else {
+                    // URL scheme
+                    LSSetDefaultHandlerForURLScheme(scheme as CFString, bundleIdentifier! as CFString)
+                }
+            }
+
+            // Send a copy of identifier to stdout
+            print(bundleIdentifier!)
         } else {
             print("Application \(appName) exists but is not a valid handler for scheme \(scheme)")
             exit(1)
@@ -85,7 +97,7 @@ switch CommandLine.arguments[1] {
 case "get" where CommandLine.argc == 3:
     // Print name for scheme in argument
     getBundleName(for: CommandLine.arguments[2])
-case "set" where CommandLine.argc == 4:
+case "set" where CommandLine.argc == 4 || (CommandLine.argc == 5 && CommandLine.arguments[4] == "--simulation":
     // Set the handler for a given scheme
     if #available(macOS 10.10, *) {
         setHandler(for: CommandLine.arguments[2], as: CommandLine.arguments[3])
