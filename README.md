@@ -56,7 +56,7 @@ defaultapp help
 
 ## TODO
 - Allow to edit default apps for a given filetype (e.g. `defaultapp set .mkv IINA.app`)
-- Replace `defaultapp set` with `defaultapp bind` for readability?
 - Allow to bind scripts to URL schemes or filetypes (e.g. `defaultapp create myscheme Safari`, `defaultapp create https --file myscript.sh`)
   - Possibly create a .app in ~/.config/defaultapp/custom/ with Contents/MacOS/name being `myscript $*` registering io.defaultapp.myscript
 - Start versionning
+- Add backup option (`defaultapp backup` -> `defaultapp restore [specific_file]`)
