@@ -14,7 +14,7 @@ make install
 One-liner:
 
 ```sh
-git clone https://github.com/h0d/defaultapp.git && make -C defaultapp install && rm -rf defaultapp
+curl -L https://github.com/h0d/defaultapp/archive/master.tar.gz | tar xz -C /tmp && make -C /tmp/defaultapp-master install && rm -rf /tmp/defaultapp-master
 ```
 
 Alternatively, you can provide a custom location, e.g. `$HOME/bin` (default is `/usr/local/bin`):

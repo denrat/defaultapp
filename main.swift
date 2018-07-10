@@ -36,6 +36,7 @@ func setHandler(for scheme: String, as appName: String) {
     var bundleIdentifier: String? = nil
 
     // Match `appName' argument with a bundle identifier
+    // i.e. check if the bundle identifier corresponds to at least one app
     let bundleInfo = LSCopyApplicationURLsForBundleIdentifier(appName as CFString, nil)
     if bundleInfo != nil {
         bundleIdentifier = appName
